@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  opendaylight:
+    image: odl
+    networks:
+      default:
+        ipv4_address: 172.18.0.3
+
+  floodlight:
+    image: sysrepo
+    networks:
+      default:
+        ipv4_address: 172.18.0.2
+
+networks:
+  netconf:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
+
