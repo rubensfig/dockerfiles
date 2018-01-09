@@ -1,0 +1,10 @@
+scrape_configs:
+  - job_name:       'PythonScrape'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 1s
+
+    static_configs:
+      - targets: ['172.18.0.1:8001']
+        labels:
+          group: 'python'
