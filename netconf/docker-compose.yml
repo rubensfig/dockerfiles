@@ -3,20 +3,26 @@ services:
 
   opendaylight:
     image: odl
+    stdin_open: true
+    tty: true
     networks:
-      default:
-        ipv4_address: 172.18.0.3
+      netconf:
+        ipv4_address: 172.0.0.4
 
-  floodlight:
-    image: sysrepo
+  sysrepo:
+    image: sysrepo/sysrepo-netopeer2
+    volumes:
+      - ./src:/opt/dev/netopeer2-src
+    ports:
+      - 830:830
     networks:
-      default:
-        ipv4_address: 172.18.0.2
+      netconf:
+        ipv4_address: 172.0.0.2
 
 networks:
   netconf:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.18.0.0/24
+        - subnet: 172.0.0.0/24
 

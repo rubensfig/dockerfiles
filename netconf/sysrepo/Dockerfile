@@ -185,5 +185,6 @@ RUN \
       node-gyp build
 
 EXPOSE 6001
+VOLUME ["/opt/dev/netopeer-src"]
 CMD ["/usr/bin/sysrepod"]
 CMD ["/usr/bin/netopeer2-server", "-d"]
