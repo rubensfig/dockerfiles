@@ -18,6 +18,24 @@ services:
     networks:
       netconf:
         ipv4_address: 172.0.0.2
+  
+  etcd0:
+    image: quay.io/coreos/etcd
+    ports:
+      - 4001:4001
+      - 2380:2380
+      - 2379:2379
+    networks:
+      netconf:
+        ipv4_address: 172.0.0.3
+    environment:
+      ETCD_NAME: etcd0
+      ETCD_INITIAL_CLUSTER_STATE: new
+      ETCD_INITIAL_ADVERTISE_PEER_URLS: http://172.0.0.3:2380
+      ETCD_LISTEN_PEER_URLS: http://0.0.0.0:2380
+      ETCD_ADVERTISE_CLIENT_URLS: http://172.0.0.3:2379
+      ETCD_LISTEN_CLIENT_URLS: http://0.0.0.0:2379
+      ETCD_INITIAL_CLUSTER: etcd0=http://172.0.0.3:2380
 
 networks:
   netconf:
