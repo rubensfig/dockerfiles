@@ -2,30 +2,31 @@ FROM ubuntu:14.04
 
 RUN \
       apt-get update && apt-get install -y \
-      git \
-      curl \
-      wget \
-      libssl-dev \
-      libtool \
-      build-essential \
       autoconf \
       automake \
-      pkg-config \
-      libgtk-3-dev \
-      make \
-      vim \
-      valgrind \
-      doxygen \
-      libev-dev \
-      libavl-dev \
-      libpcre3-dev \
-      unzip \
-      sudo \
-      python-setuptools \
-      python-dev \
-      build-essential \
       bison \
-      flex
+      build-essential \
+      build-essential \
+      curl \
+      doxygen \
+      flex \
+      git \
+      libavl-dev \
+      libcurl4-openssl-dev \
+      libev-dev \
+      libgtk-3-dev \
+      libpcre3-dev \
+      libssl-dev \
+      libtool \
+      make \
+      pkg-config \
+      python-dev \
+      python-setuptools \
+      sudo \
+      unzip \
+      valgrind \
+      vim \
+      wget 
 
 # pyang
 RUN easy_install pip
@@ -120,7 +121,7 @@ RUN \
      npm install -g node-gyp
 
 # fix nodejs name problem in ubunt
-RUN sudo ln -sf /usr/bin/nodejs /usr/bin/node
+#RUN sudo ln -sf /usr/bin/nodejs /usr/bin/node
 
 # libredblack
 RUN \
@@ -161,8 +162,12 @@ RUN \
 
 # netopeer 2
 RUN \
-      cd /opt/dev && git clone https://github.com/CESNET/Netopeer2.git && cd Netopeer2 && \
+      cd /opt/dev && git clone --recursive https://github.com/rubensfig/Netopeer2.git && cd Netopeer2 && \
       git checkout master && \
+      cd /opt/dev/Netopeer2/server && \
+      cd libraries/cetcd && \
+      make -j2 && \
+      make install && \ 
       cd /opt/dev/Netopeer2/server && \
       mkdir build && cd build && \
       cmake -DCMAKE_BUILD_TYPE:String="Release" -DCMAKE_INSTALL_PREFIX:PATH=/usr .. && \
@@ -179,10 +184,7 @@ RUN \
       cd /opt/dev/libyang && \
       mkdir build_javascript_bindings && cd build_javascript_bindings && \
       cmake -DCMAKE_BUILD_TYPE:String="Release" -DCMAKE_INSTALL_PREFIX:PATH=/usr -DENABLE_BUILD_TESTS=OFF -DJAVASCRIPT_BINDING=ON .. && \
-      make -j2 && \
-      cd javascript && \
-      node-gyp configure && \
-      node-gyp build
+      make -j2
 
 EXPOSE 6001
 VOLUME ["/opt/dev/netopeer-src"]

@@ -7,7 +7,7 @@ services:
       - "9090:9090"
     networks:
       default:
-        ipv4_address: 172.18.0.3
+        ipv4_address: 172.1.0.3
 
   floodlight:
     image: flood
@@ -16,12 +16,11 @@ services:
       - "8080:8080"
     networks:
       default:
-        ipv4_address: 172.18.0.2
+        ipv4_address: 172.1.0.2
 
 networks:
   default:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.18.0.0/24
-
+        - subnet: 172.1.0.0/24

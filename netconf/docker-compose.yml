@@ -10,7 +10,7 @@ services:
         ipv4_address: 172.0.0.4
 
   sysrepo:
-    image: sysrepo/sysrepo-netopeer2
+    image: sysrepo-etcd
     volumes:
       - ./src:/opt/dev/netopeer2-src
     ports:
