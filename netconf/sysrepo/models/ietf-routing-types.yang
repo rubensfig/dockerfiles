@@ -1,422 +1,709 @@
-module iana-routing-types {
-  namespace "urn:ietf:params:xml:ns:yang:iana-routing-types";
-  prefix iana-rt-types;
+module ietf-routing-types {
 
-  organization
-    "IANA";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-routing-types";
+  prefix "rt-types";
+
+  import ietf-yang-types {
+    prefix "yang";
+  }
+
+  import ietf-inet-types {
+    prefix "inet";
+  }
+
+  organization "IETF Routing Area Working Group (rtgwg)";
+
   contact
-    "        Internet Assigned Numbers Authority
+      "Routing Area Working Group - <rtgwg@ietf.org>";
 
-     Postal: ICANN
-             4676 Admiralty Way, Suite 330
-             Marina del Rey, CA 90292
-
-     Tel:    +1 310 823 9358
-     <mailto:iana@iana.org>";
   description
     "This module contains a collection of YANG data types
-     considered defined by IANA and used for routing
-     protocols.
+     considered generally useful for routing protocols.";
 
-     Copyright (c) 2017 IETF Trust and the persons
-     identified as authors of the code.  All rights reserved.
-
-     Redistribution and use in source and binary forms, with or
-     without modification, is permitted pursuant to, and subject
-     to the license terms contained in, the Simplified BSD License
-     set forth in Section 4.c of the IETF Trust's Legal Provisions
-     Relating to IETF Documents
-     (http://trustee.ietf.org/license-info).
-
-     This version of this YANG module is part of RFC XXXX; see
-     the RFC itself for full legal notices.";
-  reference "RFC XXXX";
-
-  revision 2017-09-19 {
-    description "Initial revision.";
-    reference "RFC TBD: IANA Routing YANG Data Types";
+  revision 2017-02-27 {
+    description
+      "Initial revision.";
+    reference
+      "RFC TBD: Routing YANG Data Types";
   }
 
-  /*** Collection of IANA types related to routing ***/
-  /*** IANA address family enumeration ***/
+  /*** collection of types related to routing ***/
+  typedef router-id {
+    type yang:dotted-quad;
+    description
+      "A 32-bit number in the dotted quad format assigned to each
+       router. This number uniquely identifies the router within an
+       Autonomous System.";
+  }
 
-  typedef address-family {
+  // address-family
+  identity address-family {
+    description
+      "Base identity from which identities describing address
+       families are derived.";
+  }
+
+  identity ipv4 {
+    base address-family;
+    description
+      "This identity represents IPv4 address family.";
+  }
+
+  identity ipv6 {
+    base address-family;
+    description
+      "This identity represents IPv6 address family.";
+  }
+
+  //The rest of the values deinfed in the IANA registry
+
+  identity nsap {
+    base address-family;
+    description
+      "Address family from IANA registry.";
+  }
+  identity hdlc {
+    base address-family;
+    description
+      "(8-bit multidrop)
+        Address family from IANA registry.";
+  }
+  identity bbn1822 {
+    base address-family;
+    description
+      "AHIP (BBN report #1822)
+       Address family from IANA registry.";
+  }
+  identity ieee802 {
+    base address-family;
+    description
+      "(includes all 802 media plus Ethernet canonical format)
+       Address family from IANA registry.";
+  }
+  identity e163 {
+    base address-family;
+    description
+      "Address family from IANA registry.";
+  }
+  identity e164 {
+    base address-family;
+    description
+      "SMDS, Frame Relay, ATM
+       Address family from IANA registry.";
+  }
+  identity f69 {
+    base address-family;
+    description
+      "(Telex)
+       Address family from IANA registry.";
+  }
+  identity x121 {
+    base address-family;
+    description
+      "(X.25, Frame Relay)
+       Address family from IANA registry.";
+  }
+  identity ipx {
+    base address-family;
+    description
+      "Address family from IANA registry.";
+  }
+  identity appletalk {
+    base address-family;
+    description
+      "Address family from IANA registry.";
+  }
+  identity decnet-iv {
+    base address-family;
+    description
+      "Decnet IV
+       Address family from IANA registry.";
+  }
+  identity vines {
+    base address-family;
+    description
+      "Banyan Vines
+       Address family from IANA registry.";
+  }
+  identity e164-nsap {
+    base address-family;
+    description
+      "E.164 with NSAP format subaddress
+       Address family from IANA registry.";
+  }
+  identity dns {
+    base address-family;
+    description
+      "Domain Name System
+       Address family from IANA registry.";
+  }
+  identity dn {
+    base address-family;
+    description
+      "Distinguished Name
+       Address family from IANA registry.";
+  }
+  identity as-num {
+    base address-family;
+    description
+      "AS Number
+       Address family from IANA registry.";
+  }
+  identity xtp-v4 {
+    base address-family;
+    description
+      "XTP over IPv4
+       Address family from IANA registry.";
+  }
+  identity xtp-v6 {
+    base address-family;
+    description
+      "XTP over IPv6
+       Address family from IANA registry.";
+  }
+  identity xtp {
+    base address-family;
+    description
+      "XTP native mode XTP
+       Address family from IANA registry.";
+  }
+  identity fc-port {
+    base address-family;
+    description
+      "Fibre Channel World-Wide Port Name
+       Address family from IANA registry.";
+  }
+  identity fc-node {
+    base address-family;
+    description
+      "Fibre Channel World-Wide Node Name
+       Address family from IANA registry.";
+  }
+  identity gwid {
+    base address-family;
+    description
+      "Address family from IANA registry.";
+  }
+  identity l2vpn {
+    base address-family;
+    description
+      "Address family from IANA registry.";
+  }
+  identity mpls-tp-section-eid {
+    base address-family;
+    description
+      "MPLS-TP Section Endpoint Identifier
+       Address family from IANA registry.";
+  }
+  identity mpls-tp-lsp-eid {
+    base address-family;
+    description
+      "MPLS-TP LSP Endpoint Identifier
+       Address family from IANA registry.";
+  }
+  identity mpls-tp-pwe-eid {
+    base address-family;
+    description
+      "MPLS-TP Pseudowire Endpoint Identifier
+       Address family from IANA registry.";
+  }
+  identity mt-v4 {
+    base address-family;
+    description
+      "Multi-Topology IPv4.
+       Address family from IANA registry.";
+  }
+  identity mt-v6 {
+    base address-family;
+    description
+      "Multi-Topology IPv6.
+       Address family from IANA registry.";
+  }
+
+  /*** collection of types related to VPN ***/
+  typedef route-target {
+    type string {
+      pattern
+        '(0:(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|'
+      + '[0-5]?\d{0,3}\d):(429496729[0-5]|42949672[0-8]\d|'
+      + '4294967[01]\d{2}|429496[0-6]\d{3}|42949[0-5]\d{4}|'
+      + '4294[0-8]\d{5}|429[0-3]\d{6}|42[0-8]\d{7}|4[01]\d{8}|'
+      + '[0-3]?\d{0,8}\d))|'
+      + '(1:(((\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|'
+      + '1\d{2}|2[0-4]\d|25[0-5])):(6553[0-5]|655[0-2]\d|'
+      + '65[0-4]\d{2}|6[0-4]\d{3}|[0-5]?\d{0,3}\d))|'
+      + '(2:(429496729[0-5]|42949672[0-8]\d|4294967[01]\d{2}|'
+      + '429496[0-6]\d{3}|42949[0-5]\d{4}|4294[0-8]\d{5}|'
+      + '429[0-3]\d{6}|42[0-8]\d{7}|4[01]\d{8}|[0-3]?\d{0,8}\d):'
+      + '(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|'
+      + '[0-5]?\d{0,3}\d))';
+    }
+    description
+      "A route target is an 8-octet BGP extended community
+       initially identifying a set of sites in a BGP
+       VPN (RFC 4364). However, it has since taken on a more
+       general role in BGP route filtering.
+       A route target consists of three fields:
+       a 2-octet type field, an administrator field,
+       and an assigned number field.
+       According to the data formats for type 0, 1, and 2 defined in
+       RFC4360 and RFC5668, the encoding pattern is defined as:
+
+       0:2-octet-asn:4-octet-number
+       1:4-octet-ipv4addr:2-octet-number
+       2:4-octet-asn:2-octet-number.
+
+       Some valid examples are: 0:100:100, 1:1.1.1.1:100, and
+       2:1234567890:203.";
+    reference
+      "RFC4360: BGP Extended Communities Attribute.
+       RFC5668: 4-Octet AS Specific BGP Extended Community.";
+  }
+
+  typedef route-target-type {
     type enumeration {
-      enum ipv4 {
-        value 1;
-        description "IPv4 Address Family";
-      }
-
-      enum ipv6 {
-        value 2;
-        description "IPv6 Address Family";
-      }
-
-      enum nsap {
-        value 3;
-        description "OSI Network Service Access Point (NSAP)
-                     Address Family";
-      }
-
-      enum hdlc {
-        value 4;
-        description "High-Level Data Link Control (HDLC)
-                     Address Family";
-
-      }
-
-      enum bbn1822 {
-        value 5;
-        description "Bolt, Beranek, and Newman Report
-                     1822 (BBN 1822) Address Family";
-      }
-
-      enum ieee802 {
-        value 6;
-        description "IEEE 802 Committee Address Family (aka,
-                     MAC address)";
-      }
-
-      enum e163 {
-        value 7;
-        description "ITU-T E.163 Address Family";
-      }
-
-      enum e164 {
-        value 8;
-        description "ITU-T E.164 (SMDS, Frame Relay, ATM)
-                     Address Family";
-      }
-
-      enum f69 {
-        value 9;
-        description "ITU-T F.69 (Telex) Address Family";
-      }
-
-      enum x121 {
-        value 10;
-        description  "ITU-T X.121 (X.25, Frame Relay)
-                      Address Family";
-      }
-
-      enum ipx {
-        value 11;
-        description "Novell Internetwork Packet Exchange (IPX)
-                     Address Family";
-      }
-
-      enum appletalk {
-        value 12;
-        description  "Apple AppleTalk Address Family";
-      }
-
-      enum decnet-iv {
-        value 13;
-        description "Digital Equipment DECnet Phase IV
-                     Address Family";
-      }
-
-      enum vines {
-        value 14;
-        description "Banyan Vines Address Family";
-      }
-
-      enum e164-nsap {
-        value 15;
-        description "ITU-T E.164 with NSAP sub-address
-                     Address Family";
-      }
-
-      enum dns {
-        value 16;
-        description "Domain Name System (DNS) Address
-                     Family";
-      }
-
-      enum distinguished-name {
-        value 17;
-        description "Distinguished Name Address Family";
-      }
-
-      enum as-num {
-        value 18;
-        description "AS Number Address Family";
-      }
-
-      enum xtp-v4 {
-        value 19;
-        description "Xpress Transport Protocol (XTP) over IPv4
-                     Address Family";
-      }
-
-      enum xtp-v6 {
-        value 20;
-        description "Xpress Transport Protocol (XTP) over IPv6
-                     Address Family";
-      }
-
-      enum xtp-native {
-        value 21;
-        description "Xpress Transport Protocol (XTP) native mode
-                     Address Family";
-      }
-
-      enum fc-port {
-        value 22;
-        description "Fibre Channel (FC) World-Wide Port Name
-                      Address Family";
-      }
-
-      enum fc-node {
-        value 23;
-        description "Fibre Channel (FC) World-Wide Node Name
-                     Address Family";
-      }
-
-      enum gwid {
-        value 24;
+      enum "import" {
+        value "0";
         description
-          "ATM Gateway Identifier (GWID) Number Address Family";
-      }
-
-      enum l2vpn {
-        value 25;
-        description "Layer-2 VPN (L2VPN) Address Family";
-      }
-
-      enum mpls-tp-section-eid {
-        value 26;
-        description "MPLS-TP Section Endpoint Identifier
-                     Address Family";
-      }
-
-      enum mpls-tp-lsp-eid {
-        value 27;
-        description "MPLS-TP LSP Endpoint Identifier
-                     Address Family";
-      }
-
-      enum mpls-tp-pwe-eid {
-        value 28;
-        description "MPLS-TP Pseudowire Endpoint Identifier
-                     Address Family";
-      }
-
-      enum mt-v4 {
-        value 29;
-        description "Multi-Topology IPv4 Address Family";
-      }
-
-      enum mt-v6 {
-        value 30;
-        description "Multi-Topology IPv6 Address Family";
-      }
-
-      enum eigrp-common-sf {
-        value 16384;
-        description "Enhanced Interior Gateway Routing Protocol
-                     (EIGRP) Common Service Family Address
-                     Family";
-      }
-
-      enum eigrp-v4-sf {
-        value 16385;
-        description "Enhanced Interior Gateway Routing Protocol
-                     (EIGRP) IPv4 Service Family Address Family";
-      }
-
-      enum eigrp-v6-sf {
-        value 16386;
-        description "Enhanced Interior Gateway Routing Protocol
-                    (EIGRP) IPv6 Service Family Address Family";
-      }
-
-      enum lcaf {
-        value 16387;
-        description "LISP Canonical Address Format (LCAF)
-                     Address Family";
-      }
-
-      enum bgp-ls {
-        value 16388;
-        description "Border Gateway Protocol - Link State (BGP-LS)
-                     Address Family";
-      }
-
-      enum mac-48 {
-        value 16389;
-        description  "IEEE 48-bit Media Access Control (MAC)
-                      Address Family";
-      }
-
-      enum mac-64 {
-        value 16390;
-        description "IEEE 64-bit Media Access Control (MAC)
-                     Address Family";
-      }
-
-      enum trill-oui {
-        value 16391;
-        description "TRILL IEEE Organizationally Unique
-                     Identifier (OUI) Address Family";
-      }
-
-      enum trill-mac-24 {
-        value 16392;
-        description "TRILL Final 3 octets of 48-bit MAC
-                     address Address Family";
-      }
-
-      enum trill-mac-40 {
-        value 16393;
-        description "TRILL Final 5 octets of 64-bit MAC
-                     address Address Family";
-      }
-
-      enum ipv6-64 {
-        value 16394;
-        description "First 8 octets (64-bits) of an IPv6
-                     address Address Family";
-      }
-
-      enum trill-rbridge-port-id {
-        value 16395;
-        description "TRILL Remote Bridge (RBridge) Port ID
-                     Address Family";
-      }
-
-      enum trill-nickname {
-        value 16396;
-        description "TRILL Nickname Address Family";
-      }
+          "The route target applies to route import.";
+       }
+      enum "export" {
+        value "1";
+        description
+          "The route target applies to route export.";
+       }
+      enum "both" {
+        value "2";
+        description
+          "The route target applies to both route import and
+           route export.";
+       }
     }
-    description "Enumeration containing all the IANA
-                  defined address families.";
-
+    description
+      "Indicates the role a route target takes
+       in route filtering.";
+    reference
+      "RFC4364: BGP/MPLS IP Virtual Private Networks (VPNs).";
   }
 
-  /*** SAFIs for Multi-Protocol BGP enumeration ***/
+  typedef route-distinguisher {
+    type string {
+      pattern
+        '(0:(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|'
+      + '[0-5]?\d{0,3}\d):(429496729[0-5]|42949672[0-8]\d|'
+      + '4294967[01]\d{2}|429496[0-6]\d{3}|42949[0-5]\d{4}|'
+      + '4294[0-8]\d{5}|429[0-3]\d{6}|42[0-8]\d{7}|4[01]\d{8}|'
+      + '[0-3]?\d{0,8}\d))|'
+      + '(1:(((\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|'
+      + '1\d{2}|2[0-4]\d|25[0-5])):(6553[0-5]|655[0-2]\d|'
+      + '65[0-4]\d{2}|6[0-4]\d{3}|[0-5]?\d{0,3}\d))|'
+      + '(2:(429496729[0-5]|42949672[0-8]\d|4294967[01]\d{2}|'
+      + '429496[0-6]\d{3}|42949[0-5]\d{4}|4294[0-8]\d{5}|'
+      + '429[0-3]\d{6}|42[0-8]\d{7}|4[01]\d{8}|[0-3]?\d{0,8}\d):'
+      + '(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|'
+      + '[0-5]?\d{0,3}\d))|'
+      + '(([3-9a-fA-F]|[1-9a-fA-F][\da-fA-F]{1,3}):'
+      + '[\da-fA-F]{1,12})';
+    }
+    description
+      "A route distinguisher is an 8-octet value used to distinguish
+       routes from different BGP VPNs (RFC 4364). A route
+       distinguisher consists of three fields: A 2-octet type field,
+       an administrator field, and an assigned number field.
+       According to the data formats for type 0, 1, and 2 defined in
+       RFC4364, the encoding pattern is defined as:
 
-  typedef bgp-safi {
+       0:2-octet-asn:4-octet-number
+       1:4-octet-ipv4addr:2-octet-number
+       2:4-octet-asn:2-octet-number.
+       2-octet-other-hex-number:6-octet-hex-number
+
+       Some valid examples are: 0:100:100, 1:1.1.1.1:100, and
+       2:1234567890:203.";
+    reference
+      "RFC4364: BGP/MPLS IP Virtual Private Networks (VPNs).";
+  }
+
+  /*** collection of types common to multicast ***/
+  typedef ipv4-multicast-group-address {
+    type inet:ipv4-address {
+      pattern '(2((2[4-9])|(3[0-9]))\.).*';
+    }
+    description
+      "This type represents an IPv4 multicast group address,
+       which is in the range from 224.0.0.0 to 239.255.255.255.";
+    reference
+      "RFC1112: Host Extensions for IP Multicasting.";
+  }
+
+  typedef ipv6-multicast-group-address {
+    type inet:ipv6-address {
+      pattern
+        '(([fF]{2}[0-9a-fA-F]{2}):).*';
+    }
+    description
+      "This type represents an IPv6 multicast group address,
+       which is in the range of FF00::/8.";
+    reference
+      "RFC4291: IP Version 6 Addressing Architecture. Sec 2.7.
+       RFC7346: IPv6 Multicast Address Scopes.";
+  }
+
+  typedef ip-multicast-group-address {
+    type union {
+      type ipv4-multicast-group-address;
+      type ipv6-multicast-group-address;
+    }
+    description
+     "This type represents an IP multicast group address and is IP
+      version neutral. The format of the textual representation
+      implies the IP version.";
+  }
+
+  typedef ipv4-multicast-source-address {
+    type union {
+      type enumeration {
+        enum '*' {
+          description
+          "Any source address.";
+        }
+      }
+      type inet:ipv4-address;
+    }
+    description
+      "Multicast source IPv4 address type.";
+  }
+
+  typedef ipv6-multicast-source-address {
+    type union {
+      type enumeration {
+        enum '*' {
+          description
+          "Any source address.";
+        }
+      }
+      type inet:ipv6-address;
+    }
+    description
+      "Multicast source IPv6 address type.";
+  }
+
+  /*** collection of types common to protocols ***/
+  typedef bandwidth-ieee-float32 {
+    type string {
+      pattern
+        '0[xX](0((\.0?)?[pP](\+)?0?|(\.0?))|'
+      + '1(\.([\da-fA-F]{0,5}[02468aAcCeE]?)?)?[pP](\+)?(12[0-7]|'
+      + '1[01]\d|0?\d?\d)?)';
+    }
+    description
+      "Bandwidth in IEEE 754 floating point 32-bit binary format:
+       (-1)**(S) * 2**(Exponent-127) * (1 + Fraction),
+       where Exponent uses 8 bits, and Fraction uses 23 bits.
+       The units are octets per second.
+       The encoding format is the external hexadecimal-significand
+       character sequences specified in IEEE 754 and C99,
+       restricted to be normalized, non-negative, and non-fraction:
+       0x1.hhhhhhp{+}d or 0X1.HHHHHHP{+}D
+       where 'h' and 'H' are hexadecimal digits, 'd' and 'D' are
+       integers in the range of [0..127].
+       When six hexadecimal digits are used for 'hhhhhh' or 'HHHHHH',
+       the least significant digit must be an even number.
+       'x' and 'X' indicate hexadecimal; 'p' and 'P' indicate power
+       of two.
+       Some examples are: 0x0p0, 0x1p10, and 0x1.abcde2p+20";
+    reference
+      "IEEE Std 754-2008: IEEE Standard for Floating-Point
+       Arithmetic.";
+  }
+
+  typedef link-access-type {
     type enumeration {
-      enum unicast-safi {
-        value 1;
-        description "Unicast SAFI";
+      enum "broadcast" {
+        description
+        "Specify broadcast multi-access network.";
       }
-
-      enum multicast-safi {
-        value 2;
-        description "Multicast SAFI";
+      enum "non-broadcast-multiaccess" {
+        description
+        "Specify Non-Broadcast Multi-Access (NBMA) network.";
       }
-
-      enum labeled-unicast-safi {
-        value 4;
-        description "Labeled Unicast SAFI";
+      enum "point-to-multipoint" {
+        description
+        "Specify point-to-multipoint network.";
       }
-
-      enum multicast-vpn-safi {
-        value 5;
-        description "Multicast VPN SAFI";
-      }
-
-      enum pseudowire-safi {
-        value 6;
-        description "Multi-segment Pseudowire VPN SAFI";
-      }
-
-      enum tunnel-encap-safi {
-        value 7;
-        description "Tunnel Encap SAFI";
-      }
-
-      enum mcast-vpls-safi {
-        value 8;
-        description "Multicast Virtual Private LAN Service
-                     (VPLS) SAFI";
-      }
-
-      enum tunnel-safi {
-        value 64;
-        description "Tunnel SAFI";
-      }
-
-      enum vpls-safi {
-        value 65;
-        description "Virtual Private LAN Service (VPLS) SAFI";
-      }
-
-      enum mdt-safi {
-        value 66;
-        description "Multicast Distribution Tree (MDT) SAFI";
-      }
-
-      enum v4-over-v6-safi {
-        value 67;
-        description "IPv4 over IPv6 SAFI";
-      }
-
-      enum v6-over-v4-safi {
-        value 68;
-        description "IPv6 over IPv4 SAFI";
-      }
-
-      enum l1-vpn-auto-discovery-safi {
-        value 69;
-        description "Layer-1 VPN Auto Discovery SAFI";
-      }
-
-      enum evpn-safi {
-        value 70;
-        description "Ethernet VPN (EVPN) SAFI";
-      }
-
-      enum bgp-ls-safi {
-        value 71;
-        description "BGP Link-State (BGP-LS) SAFI";
-      }
-
-      enum bgp-ls-vpn-safi {
-        value 72;
-        description "BGP Link-State (BGP-LS) VPN SAFI";
-      }
-
-      enum sr-te-safi {
-        value 73;
-        description "Segment Routing - Traffic Engineering
-                     (SR-TE) SAFI";
-      }
-
-      enum labeled-vpn-safi {
-        value 128;
-        description "MPLS Labeled VPN SAFI";
-      }
-
-      enum multicast-mpls-vpn-safi {
-        value 129;
-        description "Multicast for BGP/MPLS IP VPN SAFI";
-      }
-
-      enum route-target-safi {
-        value 132;
-        description "Route Target SAFI";
-      }
-
-      enum ipv4-flow-spec-safi {
-        value 133;
-        description "IPv4 Flow Specification SAFI";
-      }
-
-      enum vpnv4-flow-spec-safi {
-        value 134;
-        description "IPv4 VPN Flow Specification SAFI";
-      }
-
-      enum vpn-auto-discovery-safi {
-        value 140;
-        description "VPN Auto-Discovery SAFI";
+      enum "point-to-point" {
+        description
+        "Specify point-to-point network.";
       }
     }
-    description "Enumeration for BGP Subsequent Address
-                 Family Identifier (SAFI) - RFC 4760.";
+    description
+      "Link access type.";
   }
+
+  typedef timer-multiplier {
+    type uint8;
+    description
+      "The number of timer value intervals that should be
+       interpreted as a failure.";
+  }
+
+  typedef timer-value-seconds16 {
+    type union {
+      type uint16 {
+        range "1..65535";
+        }
+      type enumeration {
+        enum "infinity" {
+          description "The timer is set to infinity.";
+        }
+        enum "not-set" {
+          description "The timer is not set.";
+        }
+      }
+    }
+    units seconds;
+    description "Timer value type, in seconds (16 bit range).";
+  }
+
+  typedef timer-value-seconds32 {
+    type union {
+      type uint32 {
+        range "1..4294967295";
+        }
+      type enumeration {
+        enum "infinity" {
+          description "The timer is set to infinity.";
+        }
+        enum "not-set" {
+          description "The timer is not set.";
+        }
+      }
+    }
+    units seconds;
+    description "Timer value type, in seconds (32 bit range).";
+  }
+
+  typedef timer-value-milliseconds {
+    type union {
+      type uint32{
+        range "1..4294967295";
+        }
+      type enumeration {
+        enum "infinity" {
+          description "The timer is set to infinity.";
+        }
+        enum "not-set" {
+          description "The timer is not set.";
+        }
+      }
+    }
+    units milliseconds;
+    description "Timer value type, in milliseconds.";
+  }
+
+  /*** collection of types related to MPLS/GMPLS ***/
+  typedef generalized-label {
+    type binary;
+    description
+      "Generalized label. Nodes sending and receiving the
+       Generalized Label know the kinds of link they are
+       using. Hence, the Generalized Label does not identify
+       its type.  Instead, nodes are expected to know from
+       the context and type of label to expect.";
+    reference "RFC3471: Section 3.2";
+  }
+
+  identity mpls-label-special-purpose-value {
+    description
+      "Base identity for deriving identities describing
+       special-purpose Multiprotocol Label Switching (MPLS) label
+       values.";
+    reference
+      "RFC7274: Allocating and Retiring Special-Purpose MPLS
+       Labels.";
+  }
+
+  identity ipv4-explicit-null-label {
+    base mpls-label-special-purpose-value;
+    description
+      "This identity represents the IPv4 Explicit NULL Label.";
+    reference
+      "RFC3032: MPLS Label Stack Encoding. Section 2.1.";
+  }
+
+  identity router-alert-label {
+    base mpls-label-special-purpose-value;
+    description
+      "This identity represents the Router Alert Label.";
+    reference
+      "RFC3032: MPLS Label Stack Encoding. Section 2.1.";
+  }
+
+  identity ipv6-explicit-null-label {
+    base mpls-label-special-purpose-value;
+    description
+      "This identity represents the IPv6 Explicit NULL Label.";
+    reference
+      "RFC3032: MPLS Label Stack Encoding. Section 2.1.";
+  }
+
+  identity implicit-null-label {
+    base mpls-label-special-purpose-value;
+    description
+      "This identity represents the Implicit NULL Label.";
+    reference
+      "RFC3032: MPLS Label Stack Encoding. Section 2.1.";
+  }
+
+  identity entropy-label-indicator {
+    base mpls-label-special-purpose-value;
+    description
+      "This identity represents the Entropy Label Indicator.";
+    reference
+      "RFC6790: The Use of Entropy Labels in MPLS Forwarding.
+       Sections 3 and 10.1.";
+  }
+
+  identity gal-label {
+    base mpls-label-special-purpose-value;
+    description
+      "This identity represents the Generic Associated Channel Label
+       (GAL).";
+    reference
+      "RFC5586: MPLS Generic Associated Channel.
+       Sections 4 and 10.";
+  }
+
+  identity oam-alert-label {
+    base mpls-label-special-purpose-value;
+    description
+      "This identity represents the OAM Alert Label.";
+    reference
+      "RFC3429: Assignment of the 'OAM Alert Label' for Multiprotocol
+       Label Switching Architecture (MPLS) Operation and Maintenance
+       (OAM) Functions.
+       Sections 3 and 6.";
+  }
+
+  identity extension-label {
+    base mpls-label-special-purpose-value;
+    description
+      "This identity represents the Extension Label.";
+    reference
+      "RFC7274: Allocating and Retiring Special-Purpose MPLS Labels.
+       Sections 3.1 and 5.";
+  }
+
+  typedef mpls-label-special-purpose {
+    type identityref {
+      base mpls-label-special-purpose-value;
+    }
+    description
+      "This type represents the special-purpose Multiprotocol Label
+       Switching (MPLS) label values.";
+    reference
+      "RFC3032: MPLS Label Stack Encoding.
+       RFC7274: Allocating and Retiring Special-Purpose MPLS
+       Labels.";
+  }
+
+  typedef mpls-label-general-use {
+    type uint32 {
+      range "16..1048575";
+    }
+    description
+      "The 20 bits label values in an MPLS label stack entry,
+       specified in RFC3032. This label value does not include
+       the encodings of Traffic Class and TTL (time to live).
+       The label range specified by this type is for general use,
+       with special-purpose MPLS label values excluded.";
+    reference
+      "RFC3032: MPLS Label Stack Encoding.";
+  }
+
+  typedef mpls-label {
+    type union {
+      type mpls-label-special-purpose;
+      type mpls-label-general-use;
+    }
+    description
+      "The 20 bits label values in an MPLS label stack entry,
+       specified in RFC3032. This label value does not include
+       the encodings of Traffic Class and TTL (time to live).";
+    reference
+      "RFC3032: MPLS Label Stack Encoding.";
+  }
+
+  /*
+   * Groupings
+   */
+  grouping mpls-label-stack {
+    description
+      "A grouping that specifies an MPLS label stack.";
+    container mpls-label-stack {
+      description
+        "Container for a list of MPLS label stack entries.";
+      list entry {
+        key "id";
+        description
+          "List of MPLS label stack entries.";
+        leaf id {
+          type uint8;
+          description
+            "Identifies the sequence of an MPLS label stack entries.
+             An entry with smaller ID value is precedes an entry in
+             the label stack with a smaller ID.";
+        }
+        leaf label {
+          type rt-types:mpls-label;
+          description
+            "Label value.";
+        }
+        leaf ttl {
+          type uint8;
+          description
+            "Time to Live (TTL).";
+          reference
+            "RFC3032: MPLS Label Stack Encoding.";
+        }
+        leaf traffic-class {
+          type uint8 {
+            range "0..7";
+          }
+          description
+            "Traffic Class (TC).";
+          reference
+            "RFC5462: Multiprotocol Label Switching (MPLS) Label
+             Stack Entry: 'EXP' Field Renamed to 'Traffic Class'
+             Field.";
+        }
+      }
+    }
+  } // mpls-label-stack
+
+  grouping vpn-route-targets {
+    description
+      "A grouping that specifies Route Target import-export rules
+       used in the BGP enabled Virtual Private Networks (VPNs).";
+    reference
+      "RFC4364: BGP/MPLS IP Virtual Private Networks (VPNs).
+       RFC4664: Framework for Layer 2 Virtual Private Networks
+       (L2VPNs)";
+    list vpn-target {
+      key route-target;
+      description
+        "List of Route Targets.";
+      leaf route-target {
+        type rt-types:route-target;
+        description
+          "Route Target value";
+      }
+      leaf route-target-type {
+        type rt-types:route-target-type;
+        mandatory true;
+        description
+          "Import/export type of the Route Target.";
+      }
+    }
+  } // vpn-route-targets
 }
