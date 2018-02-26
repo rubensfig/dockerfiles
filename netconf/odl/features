@@ -1,1 +1,1 @@
-odl-l2switch-switch odl-restconf odl-mdsal-apidocs odl-netconf-mdsal odl-netconf-connector odl-netconf-topology odl-netconf-console odl-dlux-core odl-dluxapps-nodes odl-dluxapps-topology odl-dluxapps-yangui odl-dluxapps-yangvisualizer odl-dluxapps-yangman
+odl-l2switch-switch odl-restconf odl-mdsal-apidocs odl-netconf-mdsal odl-netconf-connector odl-netconf-topology odl-netconf-console odl-dlux-core odl-dluxapps-nodes odl-dluxapps-topology odl-dluxapps-yangui odl-dluxapps-yangvisualizer odl-dluxapps-yangman odl-netvirt-openstack odl-dlux-core odl-mdsal-apidocs

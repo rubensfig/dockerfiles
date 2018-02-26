@@ -1,17 +1,6 @@
 version: '3'
 services:
 
-  opendaylight:
-    image: odl
-    stdin_open: true
-    ports:
-      - 6653:6653
-      - 8081:8081
-    tty: true
-    networks:
-      netconf:
-        ipv4_address: 172.0.0.4
-
   etcd0:
     image: quay.io/coreos/etcd
     ports:
