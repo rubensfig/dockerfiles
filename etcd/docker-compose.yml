@@ -19,6 +19,8 @@ services:
       ETCD_ADVERTISE_CLIENT_URLS: http://172.0.0.3:2379
       ETCD_LISTEN_CLIENT_URLS: http://0.0.0.0:2379
       ETCD_INITIAL_CLUSTER: etcd0=http://172.0.0.3:2380
+      ETCD_SNAPSHOT_COUNT: 1000000
+      ETCD_DEBUG: 'True'
 
 networks:
   netconf:
