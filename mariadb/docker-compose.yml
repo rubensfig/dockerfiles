@@ -1,0 +1,34 @@
+version: '3'
+services:
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      base:
+        aliases:
+            - mariadb
+        ipv4_address: 172.100.0.3
+
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: test_pass # TODO: Change this
+      MYSQL_DATABASE: test_db
+    volumes:
+      - ./db/:/docker-entrypoint-initdb.d/
+    networks:
+      base:
+        aliases:
+            - mariadb
+        ipv4_address: 172.100.0.2
+
+networks:
+  base:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.100.0.0/24
