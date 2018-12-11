@@ -16,8 +16,7 @@ services:
     image: mariadb
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: test_pass # TODO: Change this
-      MYSQL_DATABASE: test_db
+      MYSQL_ROOT_PASSWORD: saltroot
     volumes:
       - ./db/:/docker-entrypoint-initdb.d/
     networks:
