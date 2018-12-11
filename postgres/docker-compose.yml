@@ -1,0 +1,16 @@
+version: '3'
+services:
+  postgresql:
+    restart: always
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - DB_USER=salt
+      - DB_PASS=salt
+      - DB_NAME=salt
+      - DB_TEMPLATE=
+    volumes:
+      - ./salt.sql:/docker-entrypoint-initdb.d/salt.sql
+volumes:
+  salt.sql:
