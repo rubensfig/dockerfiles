@@ -9,10 +9,14 @@ services:
 
   postgresql:
     restart: always
+    environment:
+      PGPASSWORD: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
     image: postgres
     ports:
-      - "5432:5432"
+      - 5432:5432
     volumes:
-      - ./salt.sql:/docker-entrypoint-initdb.d/salt.sql
+      - ./db/:/docker-entrypoint-initdb.d/
 volumes:
-  salt.sql:
+  db:
