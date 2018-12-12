@@ -4,7 +4,7 @@ CREATE DATABASE salt WITH OWNER salt;
 GRANT ALL PRIVILEGES ON DATABASE "salt" to salt;
 EOF
 
-psql -d salt << EOF
+psql -U salt -d salt << EOF
 --
 -- Table structure for table 'jids'
 --
